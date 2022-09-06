@@ -1,23 +1,37 @@
 div {
     width: 400px;
     height: 90px;
-    position: static;
+    position: relative;
 }
 
-#div1 {
+.flagg {
+    border: 2px solid black;
+    height: 269px;
+    position: relative;
+    width: 100%;
+    margin: 10px;
+}
+
+#russland_div1 {
     background-color: white;
 }
 
-#div2 {
+#russland_div2 {
     background-color: blue;
 }
 
-#div3 {
+#russland_div3 {
     background-color: red;
 }
 
-#maindiv {
-    border: 2px solid black;
-    height: 270px;
-    position: fixed;
+#japan_span {
+    background-color: red;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    right: 125px;
+    top: 60px;
+
 }
