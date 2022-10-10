@@ -1,0 +1,256 @@
+
+* {
+    box-sizing: border-box;
+}
+
+.test {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 1920px;
+}
+
+.wrapper {
+    /*margin: 0 auto;
+    width: 853px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);*/
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 1920px;
+}
+
+.rankKnapp {
+    width: 384px;
+    height: 216px;
+    margin: 20px;
+    border-radius: 5px;
+    transition: transform .2s;
+}
+
+.rankKnapp:hover {
+    transform: scale(1.1);
+}
+
+/*.wrapperMeny {
+    margin: 0 auto;
+    width: 853px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid red;
+    text-align: center;
+}
+*/
+
+/*
+.wrapperMeny {
+    border: 1px solid red;
+    margin: 20px auto;
+    width: 40%;
+    height: 100%;
+    position: relative;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1em 3em;
+    display: inline-block;
+    min-width: 853px;
+}
+*/
+
+.wrapperMeny {
+    width: 853px;
+    position: absolute;
+    vertical-align: middle;
+    margin: 0 auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 10%;
+}
+
+.kolonne {
+    float: left;
+    width: 50%;
+    padding: 20px;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#rankBilder {
+    margin: auto;
+}
+
+
+.bytteKnapp {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    transition: transform .2s;
+
+}
+
+.bytteKnapp:hover {
+    transform: scale(1.1);
+}
+
+.nesteRank {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    margin: 0 30px;
+    width: 150px;
+    height: 150px;
+    transform: translate(0, 0);
+    /*position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 10px;
+    min-width: 150px;
+    height: 150px;
+    border: 1px solid red;
+    right: 30px;*/
+}
+
+.forrigeRank {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    margin: 0 30px;
+    width: 150px;
+    height: 150px;
+    transform: translate(0, 0);
+    
+}
+
+.logo {
+    position: absolute;
+    /*transform: translate(0, 0);*/
+    margin: 20px;
+    width: 137.5px;
+    height: 60px;
+}
+
+.logoIndex {
+    position: absolute;
+    transform: translate(0, 0);
+    margin: 20px;
+    width: 137.5px;
+    height: 60px;
+}
+
+body {
+    margin: 0;
+    color: #999999;
+    background-image: url('Bilder/Bakgrunn.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height: 100%;
+}
+
+p {
+    font-family: Lato, sans-serif;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.tittelBoks {
+    margin: 10px auto;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 70%;
+    min-width: 1344px;
+    min-height: 203px;
+    /*display: block;*/
+    display: inline-block;
+
+    background-color: #0b0e13;
+    font-family: Lato, sans-serif;
+    color: #ffffff;
+    background-color: #151515;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 200%;
+}
+/*.overskrift {
+   
+}*/
+
+.undertittel {
+    height: 100px;
+    text-align: center;
+    border-width: 80%;
+    margin: auto auto;
+    font-size: 84%;
+}
+
+.innholdBoks {
+    margin: 20px auto;
+    width: 70%;
+    height: 100%;
+    position: relative;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(21,21,21);
+    color: #dfdfdf;
+    padding: 1em 3em;
+    display: inline-block;
+    min-width: 1344px;
+}
+
+.innholdVenstre {
+    margin: 10px;
+    float: left;
+    width: 64%;
+    padding: 20px;
+}
+
+.innholdHoyre {
+    margin: 10px;
+    float: right;
+    width: 32%;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+a {
+    text-decoration: none;
+    color: #dfdfdf;
+}
+
+.innholdVenstreMaps {
+    margin: 10px;
+    float: left;
+    width: 48%;
+    padding: 20px;
+    text-align: center;
+}
+
+.innholdHoyreMaps {
+    margin: 10px;
+    float: right;
+    width: 48%;
+    padding: 20px;
+    text-align: center;
+}
+
+.mapsBilder {
+    width: 75%;
+    height: 75%;
+    border: 3px solid #dfdfdf;
+}

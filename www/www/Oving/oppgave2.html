@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Oppgave 2</title>
+    <meta charset = "UTF-8">
+
+    <style>
+      select {
+          width: 100px;
+          height: auto;
+          font-size: 2em;
+      }
+  
+      #tallDiv {
+          width: 50%;
+          margin: auto;
+          align-items: center;
+      }
+  </style>
+  </head>
+  <body>
+
+
+    <select id = "tall" size = "15" onclick = "myFunction()">
+
+    </select>
+    <script>
+        let n0 = 0, n1 = 1, nesteNummer;
+        
+        nesteNummer = n0 + n1;
+
+        while (nesteNummer <= 1000) {
+
+            var y = document.getElementById("tall");
+                        var option = document.createElement("option");
+                        option.text = nesteNummer;
+                        y.add(option);
+
+            n0 = n1;
+            n1 = nesteNummer;
+            nesteNummer = n0 + n1;
+        }
+    </script>
+    
+    
+    
+    <canvas id = "canvas" width = "800" height = "800"></canvas>
+    <script>
+        var c = document.getElementById("canvas");
+        var ctx = c.getContext("2d");
+        ctx.moveTo(0,0);
+        ctx.lineTo(200, 100);
+        ctx.stroke();
+
+
+        function myFunction() {
+            var bredde = document.getElementById("tall").value * 3;
+            var hoyde = document.getElementById("tall").value * 0.619047619047619 * 3;
+            console.log(hoyde);
+            ctx.fillStyle = "blue";
+            ctx.clearRect(10, 10, 800, 800);
+            ctx.fillRect(10, 10, bredde, hoyde);
+        }
+
+        if (nesteNummer = 1 || 987) {
+            document.getElementById()
+        }
+      </script>
+  </body>
+</html>

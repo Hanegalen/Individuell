@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 8</title>
+
+    <style>
+        .blader {
+            position: absolute;
+            left: 420px;
+            top: 240px;
+        }
+
+        #bilde {
+            position: absolute;
+            z-index: 0;
+        }
+
+        #test {
+            position: relative;
+            top: 700px;
+        }
+
+        #tre {
+            height: 300px;
+            z-index: 2;
+            top: 150px;
+            position: absolute;
+            transform-origin: 50% 100%;
+        }
+      
+        #wattGreie {
+            position: relative;
+            top: 650px;
+        }
+
+        
+        </style>
+
+</head>
+<body>
+    <div id = "wrap">
+    <div id = "inputDiv">
+        <input type = "radio" id = "stille" value = "0" name = "vind"> "Stille"
+        <input type = "radio" id = "lettBris" value = "1" name = "vind"> "Lett bris"
+        <input type = "radio" id = "stivKuling" value = "2" name = "vind"> "Stiv kuling"
+    </div>
+
+    <div id = "bildeDiv">
+        <img src = "bilder/tre.png" id = "tre">
+        <img src = "Bilder/bilde.png" id = "bilde">
+        <img src = "Bilder/blader.png" class = "blader" id = "roter">
+        
+    </div>
+
+    <div id = "wattGreie">
+        <input type = "number" id = "inputVindstyrke">
+        <p id = "wattOutput"></p>
+        <input type = "number" id = "inputWatt24">
+        <p id = "watt24">fwa</p>
+    </div>
+
+    <audio id = "lyd" src = "Audio/milan.mp3" loop></audio>
+    <button id = "test" onclick = "test()">Test</button>
+
+    </div>
+    <script>
+        var stille = document.getElementById("stille");
+        var lettBris = document.getElementById("lettBris");
+        var stivKuling = document.getElementById("stivKuling");
+        var lyd = document.getElementById("lyd");
+        var tre = document.getElementById("tre");
+        var vindmolle = document.getElementById("roter");
+        var arrWatt = [
+            ["stille", 0, 0.2, 0],
+            ["flau vind", 0.3, 1.5, 0],
+            ["svak vind", 1.6, 3.3, 2],
+            ["lett bris", 3.4, 5.4, 10],
+            ["laber bris", 5.5, 7.9, 60],
+            ["frisk bris", 8, 10.7, 150],
+            ["liten kuling", 10.8, 13.8, 400],
+            ["stiv kuling", 13.9, 17.1, 500]
+        ];
+        var vindstyrke = document.getElementById("inputVindstyrke");
+        var output = document.getElementById("wattOutput");
+        const STENGNINGSSTYRKE = 17.2;
+
+
+        function test() {
+            
+        }
+        
+        
+        function stromProduksjon() {
+            var numVindstyrke = parseFloat(vindstyrke.value);
+            if (numVindstyrke >= STENGNINGSSTYRKE) {
+                document.getElementById("wattOutput").innerHTML = "Vindmøllen deaktiveres av sikkerhetsgrunner ved hastighet fra " + STENGNINGSSTYRKE + " m/s.";
+                return false;
+            } 
+            console.log(numVindstyrke >= arrWatt[1][1] && numVindstyrke <= arrWatt[1][2]);
+            for (i = 0; i < arrWatt.length; i++) {
+                if (numVindstyrke >= arrWatt[i][1] && numVindstyrke <= arrWatt[i][2]) {
+                    var watt = arrWatt[i][3];
+                    console.log(arrWatt[i][3]);
+                    break;
+                } 
+                    
+                
+            }
+            console.log(watt);
+            output.innerHTML = watt;
+        }
+
+        var vindstyrke24 = document.getElementById("inputWatt24");
+        var n = -1;
+        var arrWatt24 = [];
+
+        function wattProdusert() {
+            var numVindstyrke24 = parseFloat(vindstyrke24.value);
+            if (numVindstyrke24 >= STENGNINGSSTYRKE) {
+                return false;
+            } 
+            console.log(numVindstyrke24 >= arrWatt[1][1] && numVindstyrke24 <= arrWatt[1][2]);
+            for (i = 0; i < arrWatt.length; i++) {
+                if (numVindstyrke24 >= arrWatt[i][1] && numVindstyrke24 <= arrWatt[i][2] && arrWatt24.length < 4) {
+                    var watt = arrWatt[i][3];
+                    console.log(arrWatt[i][3]);
+                    n++;
+                    arrWatt24.splice(n, 0, watt);
+                    vindstyrke24.value = "";
+                    console.log(arrWatt24);
+                    console.log(n);
+                    break;
+                } 
+                  
+                
+            }
+            console.log(watt);
+            output.innerHTML = watt;
+            const arrMULTIPLISER = arrWatt24.map(x => x * 6);
+            var resultat = arrMULTIPLISER.reduce((a, b) => a + b, 0);
+            document.getElementById("watt24").innerHTML = resultat + " watt/døgn.";
+            console.log(resultat);
+            
+
+        }
+
+
+
+
+
+
+        
+        var arrHastighet = [100000, 4000, 2000];
+        
+        function animasjon(evt){
+            var indeks = Number(evt.target.value);
+            var fart = arrHastighet[indeks];
+                            
+            if (indeks == 0){
+                lyd.pause();
+            }
+            else{
+                lyd.play();   
+            }
+            
+            tre.animate([
+                {transform: "rotate(0deg)"},
+                {transform: "rotate(10deg)"}],
+                {duration: fart, direction:"alternate", iterations: "Infinity" //Uendelig
+                });
+            
+            vindmolle.animate([
+                {transform: "rotate(0deg)"},
+                {transform: "rotate(360deg)"}],
+                {duration: fart, iterations: "Infinity" //Uendelig
+                });
+        }
+        
+        stille.onchange = lettBris.onchange = stivKuling.onchange = animasjon;
+        vindstyrke.onchange = stromProduksjon;
+        vindstyrke24.onchange = wattProdusert;
+    </script>
+
+
+</body>
+</html>

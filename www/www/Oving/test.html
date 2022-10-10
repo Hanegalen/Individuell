@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 3</title>
+    <style>
+        body {
+            background-color: rgb(70, 70, 70);
+            color: white;
+        }
+
+        #element {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+    
+   <select id = "liste" size = "6"></select>
+
+   <p id = "tekst">HER</p>
+
+    <script>
+        var arrFarger =  [
+            "rød",
+            "grønn",
+            "blå",
+            "gul",
+            "grå",
+            "svart"
+        ]
+        for (i = 0; i <= 5; i++) {
+            var listeElement = document.getElementById("liste");
+            var option = document.createElement("option");
+            
+            listeElement.add(option);
+
+            option.text = arrFarger[i];
+            option.value = arrFarger[i].indexOf(arrFarger[i]);
+        
+            var x = document.getElementById("liste").value;
+            var fargeID = (x.selectedIndex);
+
+            console.log(option.value);
+          }
+
+        
+
+      
+    </script>
+</body>
+</html>

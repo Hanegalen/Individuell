@@ -1,0 +1,72 @@
+h1 {
+    color: #F81818;
+    font-size: 40px;
+}
+
+body {
+    color: #E0E0E0;
+    font-family: "Century Gothic", Arial, sans-serif;
+    background-color: #8d9497;
+    font-size: 35px;
+    margin: auto;
+    width: 50%;
+}
+
+button {
+    background-color: #0ca3c8;
+    color: #085d72;
+    font-family: "Century Gothic", Arial, sans-serif;
+    font-size: 35px;
+
+}
+
+#body {
+    background-color: #303436;
+    margin: 50px auto;
+    padding: 15px;
+    width: 14em;
+    
+    
+}
+
+#gjettFelt {
+    padding: 0em 0em 0em 3.5    em;
+}
+
+#svar {
+    font-size: 35px;
+    width: 3em;
+}
+
+
+#tabell {
+    position: fixed;
+    top: 1em;
+    right: 10px;
+    font-size: 30px;
+    text-align: center;
+    font-family: "Century Gothic", Arial, sans-serif;
+
+}
+
+/* #forsok {
+    position: relative;
+    top: 60px;
+    left: 2370px;
+    width: 120px;
+}
+
+#poeng {
+    position: fixed;
+    top: 93px;
+    left: 2330px;
+    width: 150px;
+    text-align: center;
+}
+
+#ikoner {
+    position: fixed;
+    bottom: 1;
+    right: 0;
+    width: 70px;
+} */

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 4</title>
+    <style>
+        body {
+            background-color: #707070;
+        }
+        select {
+            min-width: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <select id = "live" size = 10 onclick = "slettOption()"></select>
+
+    <select id = "test" size = 10 onclick = "flytt()"></select>
+    <br><br><br>
+    <label for = "inputTekst">Skriv tekst</label>
+    <input type = "text" id = "inputTekst" name = "inputTekst"><br><br>
+    <label for = "addKnapp">Legg til tekst</label>
+    <input type = "submit" id = "addKnapp" name = "addKnapp" onclick = "addTekst()"><br><br>
+    <label for = "addAlleKnapp">Legg til alt</label>
+    <input type = "submit" id = "addAlleKnapp" name = "addAlleKnapp" onclick = "flytt()">
+    <br><br><br>
+    <button onclick = "testFunction()">Test</button>
+
+    <script>
+        var arr = [];
+
+        function addTekst() {
+            var tekst = document.getElementById('inputTekst').value;
+            
+            if (!arr.includes(tekst)) {
+            arr.push(tekst);
+            console.log(arr);
+            var liveListe = document.getElementById("live");
+            var option = document.createElement("option");
+            option.text = arr[arr.length - 1];
+            liveListe.add(option);
+            option.value = arr[arr.length - 1];
+            console.log(option.value);
+            }
+            document.getElementById("inputTekst").value = "";
+            document.getElementById("inputTekst").focus();
+        }
+
+        function slettOption() {
+            var index = document.getElementById("live").selectedIndex;
+            console.log(index); 
+            arr.splice(index, 1);   
+            var x = document.getElementById("live");
+            x.remove(x.selectedIndex);
+                
+                
+                
+        }
+
+        function flytt() {
+            for (i = 0; i < arr.length; i++) {
+            var testListe = document.getElementById("test");
+            var option = document.createElement("option");
+            innhold = arr[i];
+            option.text = innhold;
+            testListe.add(option);
+            option.value = innhold;
+            }
+        }
+        
+        function testFunction() {
+            console.log(arr);
+        }
+        
+        
+    
+        
+    </script>
+
+</body>
+</html>

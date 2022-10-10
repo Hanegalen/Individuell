@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas</title>
+        <meta charset = "UTF-8">
+        <style>
+            body {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id = "canvas"></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "red";
+            ctx.fillRect(450, 450, 800, 450);
+            ctx.fillStyle = "blue";
+            ctx.fillRect(770, 700, 150, 250);
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(550, 600, 100, 100);
+            ctx.fillRect(1050, 600, 100, 100);
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(400, 450);
+            ctx.lineTo(1300, 450);
+            ctx.lineTo(850, 200);
+            ctx.fill();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = "yellow";
+            ctx.arc(1400, 200, 100, 0, Math.PI * 2, true);
+            ctx.fill();
+            ctx.closePath();
+
+            var ballRadius = 10;
+            var x = canvas.width/2;
+            var y = canvas.height-30;
+            var dx = 2;
+            var dy = -2;
+
+            function drawBall() {
+                ctx.beginPath();
+                ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+                ctx.fillStyle = "#c0c0c0";
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBall();
+                
+                if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+                    dx = -dx;
+                }
+                if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+                    dy = -dy;
+                }
+                
+                x += dx;
+                y += dy;
+            }
+
+            setInterval(draw, 10);
+
+        </script>
+    </body>
+</html>

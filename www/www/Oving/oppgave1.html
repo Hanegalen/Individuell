@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Øving</title>
+    <meta charset = "UTF-8">
+</head>
+<body>
+    <div id = "wrap">
+        <form>
+            Velg tall
+            <br>
+            <select  id = "tall" size = "10" onclick = "myFunction()">
+
+            </select>
+        </form>
+        <br>
+        <!--<button onclick = "myFunction()">Fjern tall</button>-->
+        <button onclick = "lagOption()">Lag option</button>
+
+        <script>
+            function myFunction() {
+                var x = document.getElementById("tall");
+                x.remove(x.selectedIndex);
+            }
+
+            function lagOption() {
+                
+                for (i = 1; i <= 10; i++) {
+                    var y = document.getElementById("tall");
+                    var option = document.createElement("option");
+                    option.text = i;
+                    y.add(option);
+                }
+            }
+
+        </script>
+    
+    </div>
+</body>
+</html>

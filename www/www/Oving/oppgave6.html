@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 6</title>
+    <style>
+        #velgKamp {
+            width: 300px;
+        }
+
+        li {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+    <div id>
+    
+    <br><br>
+    <select id = "velgKamp" size = 10 onclick = scoringInput()></select><br><br><br>
+
+    <label for = "scoringLag1" id = "scoring1"></label>
+    <input type = "text" id = "scoringLag1"><br><br>
+
+
+    <label for = "scoringLag2" id = "scoring2"></label>
+    <input type = "text" id = "scoringLag2">
+    <br><br><br>
+
+    <button id = "test" onclick = output()>Få resultat</button>
+
+    <br><br><br>
+    <h1 id = "overskrift1"></h1>
+    <ul id = "oversikt1"></ul>
+    <br><br>
+    
+    <h1 id = "overskrift2"></h1>
+    <ul id = "oversikt2">
+    </ul>
+
+    </div>
+
+    <script>
+        var arrKamp = [
+            ["Milan", "Roma"],
+            ["Roma", "Inter"],
+            ["Inter", "Milan"]
+        ];
+
+        function optionTekst() { 
+
+            for (i = 0; i <= arrKamp.length - 1; i++) {
+                var kamp = document.getElementById("velgKamp");
+                var option = document.createElement("option");
+                
+                option.text = arrKamp[i][0] + " - " + arrKamp[i][1];
+                option.value = i;
+                kamp.add(option);
+            }    
+        }
+        
+        function scoringInput() {
+            var scoring1 = document.getElementById("scoring1");
+            var scoring2 = document.getElementById("scoring2");
+            var index = document.getElementById("velgKamp").selectedIndex;
+
+            scoring1.innerHTML = "Scoringer for " + arrKamp[index][0];
+            scoring2.innerHTML = "Scoringer for " + arrKamp[index][1];
+        }
+
+        function output() {
+            var lag1 = arrKamp[document.getElementById("velgKamp").value][0];
+            var lag2 = arrKamp[document.getElementById("velgKamp").value][1];
+            var scoring1 = document.getElementById("scoringLag1").value;
+            var scoring2 = document.getElementById("scoringLag2").value;
+            var scoringDiff1 = scoring1 - scoring2;
+            var scoringDiff2 = scoring2 - scoring1;
+            
+            if (scoring1 > scoring2) {
+                var status1 = "seier";
+                var status2 = "tap";
+                var poeng1 = 3;
+                var poeng2 = 0;
+            } else if (scoring1 < scoring2) {
+                var status1 = "tap";
+                var status2 = "seier";
+                var poeng1 = 0;
+                var poeng2 = 3;
+            } else {
+                var status1 = status2 = "uavgjort";
+                var poeng1 = poeng2 = 1;
+            }
+
+            
+            document.getElementById("overskrift1").innerHTML = lag1;
+            document.getElementById("overskrift2").innerHTML = lag2;
+
+            var liste1 = document.getElementById("oversikt1");
+            var liste2 = document.getElementById("oversikt2");
+
+            var resultat = document.createElement("li");
+            var diff = document.createElement("li");
+            var poeng = document.createElement("li");
+            resultat.appendChild(document.createTextNode("Resultat: " + status1));
+            liste1.appendChild(resultat);
+            diff.appendChild(document.createTextNode("Målforskjell: " + scoringDiff1));
+            liste1.appendChild(diff);
+            poeng.appendChild(document.createTextNode("Poeng: " + poeng1));
+            liste1.appendChild(poeng);
+
+            var resultat = document.createElement("li");
+            var diff = document.createElement("li");
+            var poeng = document.createElement("li");
+            resultat.appendChild(document.createTextNode("Resultat: " + status2));
+            liste2.appendChild(resultat);
+            diff.appendChild(document.createTextNode("Målforskjell: " + scoringDiff2));
+            liste2.appendChild(diff);
+            poeng.appendChild(document.createTextNode("Poeng: " + poeng2));
+            liste2.appendChild(poeng);
+
+            
+
+            
+            console.log(lag1, scoring1, status1, scoringDiff1, poeng1, lag2, scoring2, status2, scoringDiff2, poeng2);
+        }
+
+        window.onload = optionTekst();
+        
+    </script>
+
+</body>
+</html>

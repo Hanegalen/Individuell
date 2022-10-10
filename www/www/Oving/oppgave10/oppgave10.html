@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 10</title>
+
+    <style>
+        body {
+            background-color: #36393E;
+        }
+        
+        #bilde {
+            position: relative;
+            width: 750px;
+            height: auto;
+            margin: auto;
+            z-index: 0;
+        }
+
+        img {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            width: 100%;
+            height: 100%;
+            border: 1px solid red;
+            z-index: 2;
+        }
+
+        #peter {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            position: absolute;
+            z-index: 2;
+        }
+
+        #video {
+            display: none;
+        }
+
+        #roma {
+            display: block;
+        }
+
+        #divGjett {
+            width: 50%;
+            width: 750px;
+            height: 200px;
+            position: relative;
+            top: 30px;
+            margin: auto;
+            text-align: center;
+        }
+
+        #inputGjett {
+            top: 20px;
+            font-size: 2em;
+            position: relative;
+        }
+
+        #submitGjett {
+            top: 40px;
+            right: 20px;
+            position: relative;
+            font-size: 2em;
+        }
+
+        #outputGjett {
+            font-size: 3em;
+            background-color: #c0c0c0;
+        }
+    </style>
+</head>
+<body>
+    <div id = "wrap">
+        <img src = "Bilder/stPetersburg.png" id = "peter" onclick = skjulPeter()>
+    </div>
+    <div id = "bilde">
+        <img src = "Bilder/stPetersburg.png" onclick = visPeter()>
+        <video width = "750" height = "400" controls loop id = "video" onclick = skjulVideo()>
+            <source src = "Video/video.mp4" type = "video/mp4">
+            Nettleseren støtter ikke filformatet.
+        </video>
+        <img src = "Bilder/roma.png" id = "roma" onclick = visVideo()>
+        <img src = "Bilder/newYork.png" id = "newYork" onclick = toggleGjett()>
+    </div>
+
+    <div id = "divGjett">
+        <p style = "font-size: 2em; color: #c0c0c0"  id = "newYorkSpm">Hvilket bygg ser du på bildet?</p>
+        <input type = "text" id = "inputGjett"><br>
+        <button id = "submitGjett" onclick = gjett()>Svar</button>
+        <p id = "outputGjett"></p>
+    </div>
+
+
+<script>
+    var video = document.getElementById("video");
+    var roma = document.getElementById("roma");
+    var peter = document.getElementById("peter");
+    var newYork = document.getElementById("newYork");
+    var outputGjett = document.getElementById("outputGjett");
+    var inputGjett = document.getElementById("inputGjett");
+    var submitGjett = document.getElementById("submitGjett");
+    var divGjett = document.getElementById("divGjett");
+    var svar = "Empire State Building";
+
+    function visPeter() {
+        peter.style.display = "block";
+    }
+
+    function skjulPeter() {
+        peter.style.display = "none";
+    }
+
+    function visVideo() {
+        roma.style.display = "none";
+        video.style.display = "block";
+    }
+
+    function skjulVideo() {
+        video.style.display = "none";
+        roma.style.display = "block";
+    }
+
+    function test() {
+        divGjett.style.display = "none";
+    }
+
+    function toggleGjett() {
+        if (divGjett.style.display === "none") {
+            divGjett.style.display = "block";
+            outputGjett.innerHTML = "";
+            inputGjett.value = null;
+        } else {
+            divGjett.style.display = "none";
+        }
+    }
+
+    function gjett() {
+        var input = inputGjett.value;
+        if (input.toUpperCase() === svar.toUpperCase()) {
+            outputGjett.innerHTML = "Du vet allerede noe om New York – hva med å lære mer?";
+        } else {
+            outputGjett.innerHTML = "«Det var ikke rett – kanskje på tide med en New York-tur?";
+        }
+    }
+
+    onload = test()
+    </script>
+</body>
+</html>
+
+
+<html>
+
+<style>
+    #velgQuizDiv {
+        height: 300px;
+        width: 70%;
+        margin: auto;
+        text-align: center;
+        border: 1px solid #c0c0c0;
+        position: relative;
+    }
+
+    #quizDiv {
+        height: 400px;
+        width: 70%;
+        margin: auto;
+        text-align: center;
+        border: 1px solid #c0c0c0;
+        position: relative;
+        display: none;
+    }
+
+    #amerikansk {
+        position: relative;
+        top: 70px;
+    }
+
+    .spraakKnapp {
+        font-size: 3em;
+    }
+
+    #inputSpm {
+        font-size: 3em;
+    }
+
+    #spm {
+        font-size: 3em;
+        color: #c0c0c0;
+    }
+
+    #submitSvar {
+        font-size: 2em;
+        display: none;
+        position: relative;
+        margin: auto;
+        width: 200px;
+    }
+
+    #start {
+        font-size: 2em;
+    }
+
+    #poengMld {
+        font-size: 3em;
+        color: #c0c0c0;
+    }
+
+</style>
+
+    <body>
+        <div id = "velgQuizDiv">
+            <button id = "amerikansk" class = "spraakKnapp" onclick = "velgSpraak('amerikansk')">Amerikansk</button>
+        </div>
+        <div id = "quizDiv">
+            <p id = "spm"></p>
+            <input type = "text" id = "inputSpm" required><br><br>
+            <button id = "submitSvar" onclick = svar()>Neste spørsmål</button>
+            <button id = "start" onclick = start()>Start</button>
+            <p id = "outputSpm"></p>
+            <p id = "poengMld"></p>
+        </div>
+
+    </body>
+
+    <script>
+        var arrSpraak = [
+            ["hei", "adjø", "dag", "kveld", "natt", "brød", "melk", "sol", "måne", "løpe", "gå", "sove", "hoppe"],
+            ["hello", "bye", "day", "evening", "night", "bread", "milk", "sun", "moon", "run", "walk", "sleep", "jump"]
+        ];
+        var arrFasit = [];
+        var spraak;
+        var x = 0;
+        var i;
+        var spmOutput = document.getElementById("spm");
+        var poeng = 0;
+        var spmTekst;
+        var forslag = document.getElementById("inputSpm");
+
+        function velgSpraak(valgtSpraak) {
+            if (valgtSpraak == "amerikansk") {
+                i = 1;
+                spraak = "amerikansk";
+            }
+            
+            document.getElementById("velgQuizDiv").style.display = "none";
+            document.getElementById("quizDiv").style.display = "block";
+            
+            arrFasit = [...arrSpraak[i]];
+        }
+
+        function start() {
+            document.getElementById("start").style.display = "none";
+            document.getElementById("submitSvar").style.display = "block";
+            spmTekst = 'Hva er "' + arrSpraak[0][x] + '" på ' + spraak + '?';
+            spmOutput.innerHTML = spmTekst;
+            forslag.focus();
+        }
+
+        function poengMld() {
+            var pMld = document.getElementById("poengMld");
+            spmOutput.style.display = "none";
+            forslag.style.display = "none";
+            document.getElementById("submitSvar").style.display = "none";
+            if (poeng < 0) {
+                pMld.innerHTML = "Dette gikk ikke så bra, men det er håp for alle som vil lære et nytt språk!";
+            } else if (poeng <= 3 && poeng >= 0) {
+                pMld.innerHTML = "Avisen vår tilbyr språkkurs i New York!";
+            } else if (poeng === arrFasit.length -1) {
+                pMld.innerHTML = "Dette kan du godt!"
+            } 
+        }
+
+        function svar() {
+            
+            
+
+
+            if (x >= arrFasit.length - 1) {
+                console.log(arrFasit.length-1);
+                poengMld();
+                return;
+            }
+
+            spmTekst = 'Hva er "' + arrSpraak[0][x+1] + '" på ' + spraak + '?';
+            spmOutput.innerHTML = spmTekst;
+            
+            var fasit = arrSpraak[i][x];
+            var endeligSvar = forslag.value;
+
+            if (endeligSvar.toUpperCase() == fasit.toUpperCase()) {
+                poeng++;
+            } else {
+                poeng--;
+            }
+            console.log(fasit);
+            console.log(endeligSvar);
+            console.log(poeng);
+            
+            forslag.value = "";
+            forslag.focus();
+        
+            x++;            
+            return x;
+
+
+        
+        }
+
+        
+    </script>
+
+</html>

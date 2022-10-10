@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+	<title>SELECT-spørringer</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+
+<?php
+if(isset($_GET["blad_id"])) {
+	$blad_id = $_GET["blad_id"];
+	echo $blad_id;
+} else {
+	die("Du må angi et blad");
+}
+?>
+
+</body>
+</html>

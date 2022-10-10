@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 7</title>
+    <style>
+        #velgKamp {
+            width: 300px;
+        }
+
+        li {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    
+    <br><br>
+    <select id = "velgKamp" size = 10 onclick = "scoringInput()"></select><br><br><br>
+
+    <label for = "scoringLag1" id = "scoring1"></label>
+    <input type = "text" id = "scoringLag1"><br><br>
+
+
+    <label for = "scoringLag2" id = "scoring2"></label>
+    <input type = "text" id = "scoringLag2">
+    <br><br><br>
+
+    <button id = "faaResultat" onclick = leggTilKampresultat()>Få resultat</button>
+
+    <br>
+    <h1 id = "overskrift1"></h1>
+    <ul id = "oversikt1"></ul>
+    <br>
+    
+    <h1 id = "overskrift2"></h1>
+    <ul id = "oversikt2">
+    </ul>
+
+    </div>
+
+    <div>
+        <table id = "tabell">
+            <tr>
+                <th>Lag</th>
+                <th>Antall kamper</th>
+                <th>Seiere</th>
+                <th>Uavgjort</th>
+                <th>Tap</th>
+                <th>Mål scoret</th>
+                <th>Mål sluppet inn</th>
+                <th>Målforskjell</th>
+                <th>Poeng</th>
+            </tr>
+        </table>
+    </div>
+
+    
+
+    <script>
+        var arrLag = [
+            "Milan",
+            "Roma",
+            "Inter",
+            "Bøgboisa",
+            "Løglaget",
+            "Slabbedask FK",
+            "Turboneger"
+        ];
+
+        var arrKamp = genererKampoppsett(arrLag);
+
+        function genererKampoppsett(arrLag) {
+            // Oppretter en kamp mellom hvert lag
+            var arrKampoppsett = [];
+            // for hvert eneste lag 
+            for (i = 0; i < arrLag.length-1; i++) {
+                // for hvert eneste lag nedenfor i arrLag
+                for (x = i+1; x <= arrLag.length-1; x++) {
+                    arrKampoppsett.push( [arrLag[i], arrLag[x], null, null] );
+                }
+            }
+            return arrKampoppsett;
+        }
+
+
+
+        function optionTekst() { 
+            for (i = 0; i <= arrKamp.length - 1; i++) {
+                var kamp = document.getElementById("velgKamp");
+                var option = document.createElement("option");
+                
+                option.value = i;
+                kamp.add(option);
+                option.text = arrKamp[i][0] + " - " + arrKamp[i][1];
+            }    
+        }
+        
+        function scoringInput() {
+            var scoring1 = document.getElementById("scoring1");
+            var scoring2 = document.getElementById("scoring2");
+            var i = document.getElementById("velgKamp").value;
+
+            scoring1.innerHTML = "Scoringer for " + arrKamp[i][0];
+            scoring2.innerHTML = "Scoringer for " + arrKamp[i][1];
+            document.getElementById("scoringLag1").value = arrKamp[i][2];
+            document.getElementById("scoringLag2").value = arrKamp[i][3];
+        }
+
+        function leggTilKampresultat() {
+            if ((document.getElementById("scoringLag1").value !== "" 
+            && document.getElementById("scoringLag2").value !== "")
+            && (!isNaN(document.getElementById("scoringLag1").value)
+            && !isNaN(document.getElementById("scoringLag2").value))) {
+                i = document.getElementById("velgKamp").value;
+                arrKamp[i][2] = document.getElementById("scoringLag1").value;
+                arrKamp[i][3] = document.getElementById("scoringLag2").value;
+                document.getElementById("velgKamp").remove(document.getElementById("velgKamp").selectedIndex);
+            }
+
+            
+            document.getElementById("scoringLag1").value = "";
+            document.getElementById("scoringLag2").value = "";
+            document.getElementById("scoringLag1").focus();
+            resultattabell();
+        }
+
+        function resultattabell() {
+            arrResultattabell = [];
+            
+            for (i = 0; i < arrLag.length; i++) { 
+                //initielle verdier for hvert lag
+                var lagnavn = arrLag[i];
+                var antallKamperSpilt = 0;
+                var seiere = 0;
+                var tap = 0;
+                var uavgjort = 0;
+                var totalEgneScoringer = 0;
+                var totalMotstanderScoringer = 0;
+                var scoringDiff = 0;
+                var poeng = 0;
+
+                for (x = 0; x < arrKamp.length; x++) {
+                    
+                    if (arrKamp[x][2] === null || arrKamp[x][3] === null) {
+                        continue;
+                    } else if (arrKamp[x][0] == lagnavn) {
+                        var egneScoringer = arrKamp[x][2];
+                        var motstanderScoringer = arrKamp[x][3];
+                    } else if (arrKamp[x][1] == lagnavn){
+                        var egneScoringer = arrKamp[x][3];
+                        var motstanderScoringer = arrKamp[x][2];
+                    } else {
+                        console.log("x er her = " + x);
+
+                        continue;
+                    }
+
+                    if (egneScoringer > motstanderScoringer) {
+                        seiere++;    
+                    } else if (egneScoringer < motstanderScoringer) {
+                        tap++;
+                    } else {
+                        uavgjort++;
+                    }
+                    totalEgneScoringer += parseInt(egneScoringer);
+                    totalMotstanderScoringer += parseInt(motstanderScoringer);
+                    antallKamperSpilt++;
+                    
+                    console.log(lagnavn);
+                    console.log("x = " + x);
+                }
+
+                scoringDiff = parseInt(totalEgneScoringer - totalMotstanderScoringer);             
+                poeng = seiere * 3 + uavgjort;
+ 
+                arrResultattabell.push([arrLag[i], 
+                                        antallKamperSpilt, 
+                                        seiere, 
+                                        uavgjort, 
+                                        tap, 
+                                        totalEgneScoringer, 
+                                        totalMotstanderScoringer,
+                                        scoringDiff,
+                                        poeng]);
+                
+            }
+            arrResultattabell.sort(sortering);
+           
+            skrivTabell(arrResultattabell);
+        }
+
+        function sortering (a, b) {
+        //sorter poeng først
+            if (b[8] - a[8] < 0) {
+                return -1; //bytt plass
+            } else if (b[8] - a[8] > 0) {
+                return 1; //stay
+            }
+            //sorter målforskjell
+            if (b[7] - a[7] < 0) {
+                    return -1; //bytt plass
+                } else if (b[7] - a[7] > 0) {
+                    return 1; //stay
+            }
+            //sorter egne mål
+            if (b[5] - a[5] < 0) {
+                return -1; //bytt plass
+            } else if (b[5] - a[5] > 0) {
+                return 1; //stay
+            }
+        }
+
+    function skrivTabell(arrResultattabell) {
+        var tabell = document.getElementById("tabell");
+        for (i = tabell.rows.length - 1; i > 0; i--) {
+            tabell.deleteRow(i);
+        }
+        for (i = 0; i < arrResultattabell.length; i++) {
+            var rad = document.createElement("tr");
+            
+            for (x = 0; x < arrResultattabell[i].length; x++) {
+                console.log(arrResultattabell[i][x]);
+               td(rad, arrResultattabell[i][x]);
+                
+            }
+            tabell.appendChild(rad);
+
+        }
+        console.log("hey bitch");
+    }
+
+    function td(rad, verdi) {
+        
+        var celle = document.createElement("td");
+        celle.style.textAlign = "center";
+        var data = document.createTextNode(verdi);
+        celle.appendChild(data); 
+        rad.appendChild(celle);
+        return celle;
+    }
+
+    
+    
+    window.onload = optionTekst();
+        
+        
+    </script>
+
+</body>
+</html>

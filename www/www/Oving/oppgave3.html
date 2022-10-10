@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 3</title>
+    <style>
+        body {
+            background-color: rgb(70, 70, 70);
+            color: white;
+        }
+
+        #element {
+            text-transform: capitalize;
+        }
+
+        .rød {
+            color: red;
+            background-color: black;
+        }
+
+        .grønn {
+            color: green;
+            background-color: white;
+        }
+
+        .blå {
+            color: blue;
+            background-color: white;
+        }
+
+        .svart {
+            color: black;
+            background-color: white;
+        }
+
+        .grå {
+            color: grey;
+            background-color: black;
+        }
+
+        .gul {
+            color: yellow;
+            background-color: black;
+        }
+
+        p {
+            font-weight: bold;
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+    
+    <select id = "element"  size = "6" onclick = "tekst()"></select>
+
+    <p id = "pElement" name = "pElement"></p>
+
+    <script>
+        var arrFarger =  [
+            "rød",
+            "grønn",
+            "blå",
+            "gul",
+            "grå",
+            "svart"
+        ]
+        for (i = 0; i <= 5; i++) {
+            var y = document.getElementById("element");
+            var option = document.createElement("option");
+            option.text = arrFarger[i];
+            y.add(option);
+            option.value = arrFarger[i];
+        }
+
+        function tekst() {
+            var tekst
+            
+            var x = document.getElementById("element");
+            z = (x.selectedIndex);
+            var tekst = document.getElementById("pElement");
+            console.log(z);
+            
+
+            switch (z) {
+                case 0:
+                    tekst = " rød";
+                    document.getElementById("pElement").className = tekst;
+                    break;
+                case 1:
+                    tekst = " grønn";
+                    document.getElementById("pElement").className = tekst;
+                    break;
+                case 2:
+                    tekst = " blå";
+                    document.getElementById("pElement").className = tekst;
+                    break;
+                case 3:
+                    tekst = " gul";
+                    document.getElementById("pElement").className = tekst;
+                    break;
+                case 4:
+                    tekst = " grå";
+                    document.getElementById("pElement").className = tekst;
+                    break;
+                case 5:
+                    tekst = " svart";
+                    document.getElementById("pElement").className = tekst;
+                    break;
+                    
+                
+            }
+            document.getElementById("pElement").innerHTML = "Fargen er" + tekst;
+        }
+    </script>
+</body>
+</html>

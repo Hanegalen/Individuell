@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "stylesheet.css">
+    <title>FC Inter</title>
+</head>
+<body>
+    <div id = "wrap">
+        <div id = "menywrap">
+            <div id = "meny">
+                <ul>
+                    <li class = "menyListe"><a href = "oppgave5.html">Forside</a></li>
+                    <li class = "menyListe"><a href = "AC-Milan.html">AC Milan</a></li>
+                    <li class = "menyListe"><a href = "AS-Roma.html">AS Roma</a></li>
+                    <li class = "menyListe"><a href = "FC-Inter.html">FC Inter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "overskriftwrap">
+            <h1>FC INTER</h1>
+        </div>
+        <div id = "bildewrap">
+            <img src = "Bilder/inter.png">
+        </div>
+    </div>
+
+
+    <script>
+        function spillLyd() {
+            var lyd = new Audio("Audio/inter.mp3");
+            lyd.play();
+        }
+        
+        window.onload = spillLyd();
+    </script>
+</body>
+</html>
