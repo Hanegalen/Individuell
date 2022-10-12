@@ -1,0 +1,35 @@
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+#flagg {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    border: 2px solid black;
+    width: 600px;
+    height: 400px;
+}
+
+.flaggdel {
+    height: 400px;
+    width: 200px;
+    margin: 0;
+    position: absolute;
+}
+
+.top {
+    background-color: blue;
+}
+
+.mid {
+    right: 200px;
+    background-color: white;
+}
+
+.bottom {
+    left: 400px;
+    background-color: red;
+}
