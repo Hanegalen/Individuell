@@ -8,8 +8,8 @@ var kelvin;
 function resultat() {
     mV = document.getElementById("input").value;
     celsius = (mV - 500) / 10;
-    fahrenheit = celsius * 1.8 + 32;
-    kelvin = celsius + 273.15;
+    fahrenheit = mV * 1.8 + 32;
+    kelvin = mV + 273.15;
 }
 
 
