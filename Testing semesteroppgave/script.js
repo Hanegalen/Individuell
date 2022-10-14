@@ -16,11 +16,14 @@ let rad = 0;
 let output = document.getElementById("output");
 
 
+//Setter input til det man skriver inn i input-feltet
 function definerInput() {
     input = rawInput.value;
     return input;
 }
 
+//Sjekker om input-feltet er tomt (valid = false) eller
+//ikke (valid = true)
 function sjekkInputTom() {
     if (input == "") {
         output.innerHTML = "Vennligst skriv inn navn eller verdi";
@@ -30,6 +33,9 @@ function sjekkInputTom() {
     }
 }
 
+
+//Sjekker om navnet man legger inn i input-feltet
+//allerede er tatt (valid = false) eller er ledig (valid = true)
 function sjekkInputLedig() {
     for (i = 0; i < aLen; i++) {
         if (input == arrData[0][i]) {
@@ -40,6 +46,10 @@ function sjekkInputLedig() {
     }
 }
 
+
+//Legger til det man skriver i input-feltet i arrData, hopper
+//ned et hakk i arrData for hver input og endrer gjennomsiktig
+//tekst i input-felt
 function add() {
     definerInput();
     sjekkInputTom();
