@@ -1,11 +1,10 @@
 let arrData = [
-    ["navn", "Arman"],
+    ["navn"],
     ["jobbe i gruppe / alene"],
     ["jobbe face-to-face / digitalt"],
     ["følge arbeidsplan / freestyle"],
     ["spesifikk tid for spm / alltid tilgjengelig"],
     ["100% ferdig før går videre / move on"],
-    []
 ];
 
 let rawInput = document.getElementById("input");
@@ -37,7 +36,7 @@ function sjekkInputTom() {
 //Sjekker om navnet man legger inn i input-feltet
 //allerede er tatt (valid = false) eller er ledig (valid = true)
 function sjekkInputLedig() {
-    for (i = 0; i < aLen; i++) {
+    for (let i = 0; i < aLen; i++) {
         if (input == arrData[0][i]) {
             output.innerHTML = "Navnet finnes allerede";
             i = aLen;
@@ -54,16 +53,25 @@ function add() {
     definerInput();
     sjekkInputTom();
     sjekkInputLedig();
-    if (valid == true && rad <= aLen) {
+
+    if (valid == true && rad < aLen) {
         arrData[rad].push(input);
+        let tekstPlaceholder = arrData[rad+1][0];
+        rawInput.value = "";
+        rawInput.placeholder = tekstPlaceholder;
+        rawInput.focus();
         rad++;
+        return rad;
+
+    } else if (valid == true && rad == aLen) {
+        rad = 0;
+        arrData[rad].push(input);
         let tekstPlaceholder = arrData[rad][0];
         rawInput.value = "";
         rawInput.placeholder = tekstPlaceholder;
         rawInput.focus();
+        rad++;
         return rad;
-    } else {
-        return;
     }
 }
 
