@@ -1,0 +1,38 @@
+body {
+    background-color: #121A39;;
+}
+#input {
+    text-transform: capitalize;
+}
+
+#output {
+    position: absolute;
+    left: 70px;
+    top: 50px;
+    color: white;
+    width: 200%;
+}
+
+#add {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50px;
+    left: 80px;
+}
+
+#innerDiv {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 20%;
+}
+
+#container {
+    position: absolute;
+    width: 50%;
+    height: 20%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
