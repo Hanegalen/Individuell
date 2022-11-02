@@ -40,7 +40,7 @@ function add() {
             console.table(jsData);
 
         }
-
+ 
 function display() {
     for (let b = 0; b < arrData.length; b++) {
         for (c = 0; c < arrData[b].length; c++) {
