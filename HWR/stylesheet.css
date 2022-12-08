@@ -1,0 +1,35 @@
+body {
+    background-color: #131A29;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+.toppmeny {
+    position: absolute;
+    display: inline-block;
+    height: 10%;
+    width: 100%;
+}
+
+#formdiv {
+    position: absolute;
+    display: inline-block;
+    height: 90%;
+    top: 11%;
+    width: 100%;
+    outline: 1px solid black;
+    text-align: center;
+}
+
+.maincontainer {
+    position: absolute;
+    outline: 1px solid red;
+    height: 100%;
+    width: 100%;
+}
+
+.results {
+    position: absolute;
+    top: 50%;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <title>Homepage IS-114</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" href = "stylesheet.css">
+</head>
+<body>
+<nav>
+    <u1> 
+        <li><a href="https://github.com/StevenMTN/GROUP11A-HOW-WE-ROLL">GitHub Repository</a></li>
+        </u1>
+</nav> 
+ 
+<p style="text-align: center">  <!-- setter canvas i paragrafer for lettere sentrering på side -->
+    <canvas id="rapport"> </canvas>
+</p>
+<p style="text-align: center">
+    <canvas id="navnCanvas" height="300" width="200"> </canvas>
+</p>
+  
+
+<script>
+        
+                    
+let urls = [
+    "https://bacit.info/hwr/20221208100059-3849d394bebf1e93049cce9ca1996a0f.json", //Tobias
+    "https://bacit.info/hwr/20221208103158-ae21d55e97270b2d2099c4a3dd4c9220.json" //test1
+]
+
+let arrSporsmal = [
+    ["gors", "Jobbe i gruppe", "Jobbe alene"],
+    ["forj", "Jobbe face-to-face", "Jobbe digitalt"],
+    ["aorf", "Følge arbeidsplan", "Freestyle"],
+    ["sorv", "Spesfikk tid for spørsmål", "Spør når du vil"],
+    ["foru", "100% ferdig før man fortsetter", "Gå videre før ting er ferdig"]
+]
+
+let arrData = [];
+
+let navnCanvas = document.getElementById("navnCanvas");
+let fargeEndringcontext = navnCanvas.getContext("2d");
+let lStart = 300;
+let lSlutt = 500;
+let multi = (lSlutt - lStart)/100;
+let radius = 7;
+    
+
+Promise.all( //w3schools.com/js/js_promise.asp
+    urls.map( //mapper urlene i "urls" for fetching nedenfor https://www.w3schools.com/jsref/jsref_map.asp
+        (url) =>
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => arrData.push(res)) //pusher dataene til arrData
+    )
+)
+    .then(() => {
+        console.log(arrData) //logger objektene/personene fra arrData i konsollen
+        tegnCanvas()            //tegner informasjonen i Canvas
+    })
+
+    
+function tegnCanvas() {
+    
+    let canvas = document.getElementById("rapport");
+    canvas.width  = 800;
+    canvas.height = 300;
+    let context = canvas.getContext('2d');
+
+    for (let i = 0; i < arrSporsmal.length; i++) {
+        let yPos = 40 * i + 10;
+        let fargeEndring = 0;
+        let spm = arrSporsmal[i][0];
+        
+        tegnLinje(i, yPos, context);
+
+        arrData.forEach(function (arrayItem) {
+            let xPos = arrayItem[spm];
+            let farge = velgFarge(fargeEndring);
+
+            tegnPrikk(xPos, yPos, farge, context);
+
+            if (i == 0) {
+                let navn = arrayItem.navn
+                tegnNavn(farge, navn, fargeEndring);
+            }
+            console.log(spm);
+            fargeEndring++;
+
+        });
+    }
+}
+
+function tegnLinje(i, y, context) {
+    context.beginPath();
+    context.moveTo(lStart, y);
+    context.lineTo(lSlutt, y);
+    context.lineWidth = 5;
+    context.strokeStyle = "white";
+    context.font = "20px Arial";
+    context.fillStyle = "white";
+    context.textAlign = "end";
+    context.fillText(arrSporsmal[i][1], lStart - 10, y + 4);
+    context.textAlign = "start";
+    context.fillText(arrSporsmal[i][2], lSlutt + 10, y + 4);
+    context.closePath();
+    context.fill();
+    context.stroke();
+}
+
+function tegnPrikk(xPos, yPos, farge, context) {
+    let x = lStart + xPos * multi;
+    let y = yPos;
+    context.fillStyle = farge;
+    context.lineWidth = 1;
+    context.strokeStyle = "black";
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI);
+    context.closePath();
+    context.fill();
+    context.stroke();
+}
+
+function tegnNavn(farge, navn, fargeEndring) {
+    let x = 10;
+    let y = fargeEndring * 30 + 10;
+    fargeEndringcontext.fillStyle = farge;
+    fargeEndringcontext.lineWidth = 1;
+    fargeEndringcontext.strokeStyle = "black";
+    fargeEndringcontext.beginPath();
+    fargeEndringcontext.arc(x, y, radius, 0, 2 * Math.PI);
+    fargeEndringcontext.closePath();
+    fargeEndringcontext.fill();
+    fargeEndringcontext.stroke();
+    fargeEndringcontext.beginPath();
+    fargeEndringcontext.strokeStyle = "white";
+    fargeEndringcontext.font = "20px Arial";
+    fargeEndringcontext.fillStyle = "white";
+    fargeEndringcontext.textAlign = "start";
+    fargeEndringcontext.fillText(navn, x + radius * 2, y + 4);
+    fargeEndringcontext.stroke();
+}
+
+function velgFarge(fargeNum) {
+    return "hsl(" + (fargeNum * (360 / arrData.length) % 360) + ", 100%,50%)";
+}
+
+</script>
+</body>
+</html>
